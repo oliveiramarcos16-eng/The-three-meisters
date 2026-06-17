@@ -9,7 +9,7 @@
 | Nome | GitHub |
 |------|--------|
 | Kaike | M100-ROSE |
-| Marcos | — |
+| Marcos | oliveiramarcos16-eng |
 | Eddy | — |
 
 ---

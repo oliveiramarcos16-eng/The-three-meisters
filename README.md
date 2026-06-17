@@ -71,7 +71,7 @@ O banco de dados contempla as seguintes entidades principais:
 
 ## 📚 Disciplina
 
-> **Banco de Dados** — Curso de Tecnologia da Informação  
+> **Banco de Dados** — Curso de desenvolvimento de sistemas  
 > Trabalho prático de modelagem e implementação de banco de dados relacional.
 
 ---

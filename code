@@ -1,58 +1,152 @@
-CREATE TABLE TORCEDOR(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL,
-    IDADE INT NOT NULL,
-    IDENTIFICADOR_PESSOAL VARCHAR(255) NOT NULL UNIQUE AUTO_INCREMENT
+```sql
+USE copa_do_mundo_of;
+
+CREATE TABLE pais (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    sigla CHAR(3) NOT NULL UNIQUE,
+    continente VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE ESTADIO(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL,
-    LOCALIZACAO VARCHAR(255) NOT NULL,
-    CAPACIDADE INT NOT NULL,
+CREATE TABLE tecnico (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    data_nasc DATE,
+    nacionalidade VARCHAR(100),
+    fk_pais INT NOT NULL,
+    FOREIGN KEY (fk_pais) REFERENCES pais(id)
 );
-CREATE TABLE PAIS(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL,
-    SIGLA VARCHAR(255) NOT NULL,
-    CONTINENTE VARCHAR(255) NOT NULL,
-    
-)
-CREATE TABLE TECNICO(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL,
-    FK_PAIS INT NOT NULL,
-    FOREIGN KEY(FK_PAIS) REFERENCES PAIS(ID)
-)
-CREATE TABLE SELECAO(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL,
-    SIGLA VARCHAR(5) NOT NULL,
-    FK_PAIS INT NOT NULL,
-    FK_TECNICO INT NOT NULL,
-    FOREIGN KEY (FK_PAIS) REFERENCES PAIS(ID),
-    FOREIGN KEY (FK_TECNICO) REFERENCES TECNICO(ID)
+
+CREATE TABLE selecao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    sigla CHAR(3) NOT NULL UNIQUE,
+    ranking_fifa INT,
+    fk_pais INT NOT NULL,
+    fk_tecnico INT,
+    FOREIGN KEY (fk_pais) REFERENCES pais(id),
+    FOREIGN KEY (fk_tecnico) REFERENCES tecnico(id)
 );
-CREATE TABLE FASE(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    NOME VARCHAR(255) NOT NULL
+
+CREATE TABLE funcao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL UNIQUE
 );
-CREATE TABLE PARTIDA(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    FK_ESTADIO INT NOT NULL,
-    DATA_HORA DATETIME NOT NULL,
-    FK_SELECAO1 INT NOT NULL,
-    FK_SELECAO2 INT NOT NULL,
-    FK_FASE INT NOT NULL,
-    FOREIGN KEY (FK_ESTADIO) REFERENCES ESTADIO(ID),
-    FOREIGN KEY (FK_SELECAO1) REFERENCES SELECAO(ID),
-    FOREIGN KEY (FK_SELECAO2) REFERENCES SELECAO(ID),
-    FOREIGN KEY (FK_FASE) REFERENCES FASE(ID)
+
+CREATE TABLE jogador (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    fk_funcao INT NOT NULL,
+    fk_selecao INT NOT NULL,
+    FOREIGN KEY (fk_funcao) REFERENCES funcao(id),
+    FOREIGN KEY (fk_selecao) REFERENCES selecao(id)
 );
-CREATE TABLE INGRESSO(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    FK_TORCEDOR INT NOT NULL,
-    FK_JOGO INT NOT NULL.UNSIGNED
-    FOREIGN KEY (TORCEDOR_ID) REFERENCES TORCEDOR(ID),
-    FOREIGN KEY (JOGO_ID) REFERENCES PARTIDA(ID)
-)
+
+CREATE TABLE estadio (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    localizacao VARCHAR(150) NOT NULL,
+    capacidade INT NOT NULL
+);
+
+CREATE TABLE fase (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_hora DATETIME NOT NULL,
+    fk_estadio INT NOT NULL,
+    fk_fase INT NOT NULL,
+    FOREIGN KEY (fk_estadio) REFERENCES estadio(id),
+    FOREIGN KEY (fk_fase) REFERENCES fase(id)
+);
+
+CREATE TABLE selecao_partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_selecao INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_selecao) REFERENCES selecao(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE resultado_partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    gols_selecao1 INT DEFAULT 0,
+    gols_selecao2 INT DEFAULT 0,
+    fk_partida INT NOT NULL UNIQUE,
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE arbitro (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    nacionalidade VARCHAR(100)
+);
+
+CREATE TABLE arbitro_partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_arbitro INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_arbitro) REFERENCES arbitro(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE gol_partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    minuto INT NOT NULL,
+    fk_jogador INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_jogador) REFERENCES jogador(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE falta (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    minuto INT NOT NULL,
+    descricao VARCHAR(255),
+    fk_jogador INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_jogador) REFERENCES jogador(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE penalti (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    minuto INT NOT NULL,
+    convertido BOOLEAN NOT NULL,
+    fk_jogador INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_jogador) REFERENCES jogador(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE substituicao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    minuto INT NOT NULL,
+    fk_jogador_sai INT NOT NULL,
+    fk_jogador_entra INT NOT NULL,
+    fk_partida INT NOT NULL,
+    FOREIGN KEY (fk_jogador_sai) REFERENCES jogador(id),
+    FOREIGN KEY (fk_jogador_entra) REFERENCES jogador(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+
+CREATE TABLE torcedor (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    idade INT NOT NULL,
+    identificador_pessoal VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE ingresso (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_torcedor INT NOT NULL,
+    fk_partida INT NOT NULL,
+    setor VARCHAR(50),
+    valor DECIMAL(10,2),
+    FOREIGN KEY (fk_torcedor) REFERENCES torcedor(id),
+    FOREIGN KEY (fk_partida) REFERENCES partida(id)
+);
+```

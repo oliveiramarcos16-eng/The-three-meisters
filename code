@@ -1,4 +1,4 @@
-```sql
+
 USE copa_do_mundo_of;
 
 CREATE TABLE pais (
@@ -149,4 +149,3 @@ CREATE TABLE ingresso (
     FOREIGN KEY (fk_torcedor) REFERENCES torcedor(id),
     FOREIGN KEY (fk_partida) REFERENCES partida(id)
 );
-```

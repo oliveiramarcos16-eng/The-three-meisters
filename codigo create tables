@@ -1,4 +1,3 @@
-
 USE copa_do_mundo_of;
 
 CREATE TABLE pais (

@@ -17,7 +17,25 @@ ADD COLUMN melhor_resultado_copa INT,
 ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
-
+ALTER TABLE selecao 
+ADD COLUMN grupo_atual CHAR(1),
+ADD COLUMN ano_copa YEAR,
+ADD COLUMN status ENUM('classificada', 'eliminada', 'campeã', 'em_disputa') DEFAULT 'em_disputa',
+ADD COLUMN jogos_disputados INT DEFAULT 0,
+ADD COLUMN vitorias INT DEFAULT 0,
+ADD COLUMN empates INT DEFAULT 0,
+ADD COLUMN derrotas INT DEFAULT 0,
+ADD COLUMN gols_marcados INT DEFAULT 0,
+ADD COLUMN gols_sofridos INT DEFAULT 0,
+ADD COLUMN saldo_gols INT AS (gols_marcados - gols_sofridos) STORED,
+ADD COLUMN pontos INT DEFAULT 0,
+ADD COLUMN fase_atual ENUM('grupos', 'oitavas', 'quartas', 'semi', 'final', 'campeã') DEFAULT 'grupos',
+ADD COLUMN url_escudo VARCHAR(255),
+ADD COLUMN url_uniforme_principal VARCHAR(255),
+ADD COLUMN url_uniforme_reserva VARCHAR(255),
+ADD COLUMN ativo BOOLEAN DEFAULT TRUE,
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
 
 

@@ -30,10 +30,6 @@ ADD COLUMN gols_sofridos INT DEFAULT 0,
 ADD COLUMN saldo_gols INT AS (gols_marcados - gols_sofridos) STORED,
 ADD COLUMN pontos INT DEFAULT 0,
 ADD COLUMN fase_atual ENUM('grupos', 'oitavas', 'quartas', 'semi', 'final', 'campeã') DEFAULT 'grupos',
-ADD COLUMN url_escudo VARCHAR(255),
-ADD COLUMN url_uniforme_principal VARCHAR(255),
-ADD COLUMN url_uniforme_reserva VARCHAR(255),
-ADD COLUMN ativo BOOLEAN DEFAULT TRUE,
 ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 

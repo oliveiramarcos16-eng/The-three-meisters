@@ -61,14 +61,56 @@ ADD COLUMN ordem INT,
 ADD COLUMN descricao TEXT,
 ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE partida 
+ADD COLUMN rodada VARCHAR(50),
+ADD COLUMN publico INT,
+ADD COLUMN arbitro_principal INT,
+ADD COLUMN status ENUM('agendada', 'em_andamento', 'finalizada', 'cancelada') DEFAULT 'agendada',
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
+ALTER TABLE resultado_partida 
+ADD COLUMN vencedor INT,                    -- ID da selecao vencedora
+ADD COLUMN penaltis_selecao1 INT,
+ADD COLUMN penaltis_selecao2 INT,
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE arbitro 
+ADD COLUMN idade INT,
+ADD COLUMN experiencia_copa INT DEFAULT 0,
+ADD COLUMN ativo BOOLEAN DEFAULT TRUE,
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE arbitro_partida 
+ADD COLUMN funcao ENUM('Principal', 'Assistente 1', 'Assistente 2', 'Quarto Arbitro') DEFAULT 'Principal',
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE gol_partida 
+ADD COLUMN tipo_gol ENUM('Normal', 'Cabeçada', 'Pênalti', 'Falta', 'Contra') DEFAULT 'Normal',
+ADD COLUMN assistencia INT,
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE falta 
+ADD COLUMN cartao ENUM('Amarelo', 'Vermelho', 'Segundo Amarelo') DEFAULT 'Amarelo',
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE penalti 
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE substituicao 
+ADD COLUMN motivo VARCHAR(100),
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE torcedor 
+ADD COLUMN nacionalidade VARCHAR(100),
+ADD COLUMN email VARCHAR(150),
+ADD COLUMN telefone VARCHAR(20),
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE ingresso 
+ADD COLUMN tipo ENUM('Normal', 'VIP', 'Cadeira', 'Geral') DEFAULT 'Normal',
+ADD COLUMN status ENUM('vendido', 'reservado', 'cancelado') DEFAULT 'vendido',
+ADD COLUMN data_compra DATETIME DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN criado_em DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 

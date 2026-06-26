@@ -1,4 +1,3 @@
-Aqui vai os INSERTS (apague essa mensagem apos o uso correto desse arquivo)
 INSERT INTO PAIS (ID, NOME, SIGLA, CONTINENTE) VALUES
 (1,  'México',                 'MEX', 'América do Norte'),
 (2,  'África do Sul',          'RSA', 'África'),

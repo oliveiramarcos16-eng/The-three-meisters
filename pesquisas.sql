@@ -1,4 +1,4 @@
-**Jogadores por seleção**
+
 SELECT 
     s.NOME AS Selecao,
     j.NOME AS Jogador

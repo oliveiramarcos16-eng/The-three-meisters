@@ -1,0 +1,7 @@
+**Jogadores por seleção**
+SELECT 
+    s.NOME AS Selecao,
+    j.NOME AS Jogador
+FROM JOGADOR j
+INNER JOIN SELECAO s ON j.FK_SELECAO = s.ID
+ORDER BY s.NOME, j.NOME;

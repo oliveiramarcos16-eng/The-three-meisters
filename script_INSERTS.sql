@@ -47,7 +47,6 @@ INSERT INTO PAIS (ID, NOME, SIGLA, CONTINENTE) VALUES
 (46, 'Croácia',                'CRO', 'Europa'),
 (47, 'Gana',                   'GHA', 'África'),
 (48, 'Panamá',                 'PAN', 'América do Norte'),
--- países de técnicos que não estão nas seleções acima
 (49, 'Itália',                 'ITA', 'Europa');
 INSERT INTO TECNICO (ID, NOME, FK_PAIS) VALUES
 (1,  'Javier Aguirre',         1),
@@ -172,7 +171,7 @@ INSERT INTO SELECAO (ID, NOME, SIGLA, GRUPO, FK_PAIS, FK_TECNICO) VALUES
 (44, 'Colômbia',             'COL', 'K', 44, 44),
 (45, 'Inglaterra',           'ENG', 'L', 45, 45),
 (46, 'Croácia',              'CRO', 'L', 46, 46),
-(47, 'Gana',                 'GHA', 'L', 47, 27),  -- Queiroz (ID 27)
+(47, 'Gana',                 'GHA', 'L', 47, 27),
 (48, 'Panamá',               'PAN', 'L', 48, 48);
 INSERT INTO FUNCAO (ID, NOME) VALUES
 (1, 'Goleiro'),

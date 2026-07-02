@@ -31,7 +31,7 @@ O objetivo é aplicar os conceitos estudados em sala de aula, como:
 
 O diagrama relacional do banco de dados pode ser acessado pelo link abaixo:
 
-🔗 [Visualizar Diagrama Relacional](https://drive.google.com/file/d/1dHP3lPHKz3VcbicIjxLY-Mm9k0gWhiYB/view?usp=sharing)
+🔗 [Visualizar Diagrama Relacional](https://drive.google.com/file/d/19KRqGpDjtDPwoYWw_6FP4cXzXwS-toNJ/view?pli=1)
 
 ---
 

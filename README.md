@@ -50,8 +50,8 @@ O banco de dados contempla as seguintes entidades principais:
 
 ## 🛠️ Tecnologias Utilizadas
 
-- SQL (MySQL / PostgreSQL)
-- Ferramenta de modelagem ER (BR Modelo / dbdiagram.io ou similar)
+- SQL (MySQL)
+- Ferramenta de modelagem ER (diagram.io)
 
 ---
 
@@ -60,9 +60,9 @@ O banco de dados contempla as seguintes entidades principais:
 ```
 📦 copa-do-mundo-db
  ┣ 📄 README.md
- ┣ 📄 schema.sql        # Script de criação das tabelas
+ ┣ 📄 create tables.sql        # Script de criação das tabelas
  ┣ 📄 inserts.sql       # Dados de exemplo inseridos no banco
- ┗ 📄 queries.sql       # Consultas SQL desenvolvidas
+ ┗ 📄 consultas.sql       # Consultas SQL desenvolvidas
 ```
 
 ---
@@ -75,7 +75,4 @@ O banco de dados contempla as seguintes entidades principais:
 > Trabalho prático de modelagem e implementação de banco de dados relacional.
 
 ---
-
-## 📄 Licença
-
-Este projeto foi desenvolvido para fins acadêmicos.
+## "tenha piedade de nossas humildes almas professor Cesar"
